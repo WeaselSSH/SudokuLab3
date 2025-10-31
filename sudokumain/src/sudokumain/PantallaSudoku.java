@@ -4,7 +4,6 @@
  */
 package sudokumain;
 
-import javax.swing.JFrame;
 import java.awt.*;
 import javax.swing.*;
 
@@ -17,6 +16,11 @@ public class PantallaSudoku extends BaseGUI {
     public PantallaSudoku() {
 
         super("Sudoku", 1000, 700);
+        //ResaltarCeldas
+        JTextField[][]celdas = new JTextField[9][9];
+        Color colorCeldas = new Color(247,181,189);
+        Color colorDefault = Color.white;
+        ResaltarCeldas resaltar = new ResaltarCeldas(celdas, colorCeldas, colorDefault);
 
         JPanel panel = createPanelPrincipal();
         panel.setLayout(new BorderLayout(10, 10));
@@ -37,6 +41,16 @@ public class PantallaSudoku extends BaseGUI {
                 celda.setFont(new Font("SansSerif", Font.BOLD, 20));
                 celda.setPreferredSize(new Dimension(55, 55));
                 celda.setBackground(Color.WHITE);
+                //implementando resaltarCeldas]
+                celdas[fila][col]=celda;
+                int f = fila;
+                int c= col;
+                celda.addMouseListener(new java.awt.event.MouseAdapter(){
+                @Override
+                public void mouseClicked(java.awt.event.MouseEvent evt){
+                   resaltar.colorearCeldas(f, c);
+                }
+                });
                 celda.setBorder(BorderFactory.createLineBorder(new Color(150, 150, 150), 1)); // 🔹 líneas más finas
 
                 int top = 1, left = 1, bottom = 1, right = 1;
@@ -56,13 +70,15 @@ public class PantallaSudoku extends BaseGUI {
                 celda.setBorder(BorderFactory.createMatteBorder(top, left, bottom, right, new Color(100, 100, 100)));
 
                 tableroPanel.add(celda);
-
-                add(panel);
-                setVisible(true);
+  
             }
         }
 
         panel.add(tableroPanel, BorderLayout.CENTER);
+        add(panel);
+                setVisible(true);
     }
-
+    
+    
+    
 }

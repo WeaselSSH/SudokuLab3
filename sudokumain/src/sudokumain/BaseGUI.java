@@ -24,6 +24,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 public class BaseGUI extends JFrame {
 
+    
     //font default
     private final Font baseFont = new Font("SansSerif", Font.PLAIN, 14);
 
