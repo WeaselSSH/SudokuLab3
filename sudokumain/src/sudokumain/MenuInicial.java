@@ -39,24 +39,31 @@ public class MenuInicial extends BaseGUI {
 
         add(panel);
 
+     
+
+        
+        
         Facil.addActionListener(e -> {
-            SwingUtilities.invokeLater(() -> {
-
-            });
+            int[][] t = Tableros.randomFacil();
+            new PantallaSudoku(t);
+            dispose();
         });
+        
         Medio.addActionListener(e -> {
-            SwingUtilities.invokeLater(() -> {
-
-            });
+            int[][] t = Tableros.randomMedio();
+            new PantallaSudoku(t);
+            dispose();
         });
+        
         Dificil.addActionListener(e -> {
-            SwingUtilities.invokeLater(() -> {
-
-            });
+            int[][] t = Tableros.randomDificil();
+            new PantallaSudoku(t);
+            dispose();
         });
+        
         Salir.addActionListener(e -> {
             SwingUtilities.invokeLater(() -> {
-
+                System.exit(0);
             });
         });
     }

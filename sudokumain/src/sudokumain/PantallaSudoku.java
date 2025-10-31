@@ -5,8 +5,11 @@ import javax.swing.*;
 
 public class PantallaSudoku extends BaseGUI {
 
-    public PantallaSudoku() {
+    private final int[][] tableroInicial;
+
+    public PantallaSudoku(int[][] tableroInicial) {
         super("Sudoku", 1000, 700);
+        this.tableroInicial = tableroInicial;
 
         JTextField[][] celdas = new JTextField[9][9];
         ResaltarCeldas resaltar = new ResaltarCeldas(celdas, new Color(247, 181, 189), Color.white);
@@ -30,8 +33,13 @@ public class PantallaSudoku extends BaseGUI {
                 celda.setFont(new Font("SansSerif", Font.BOLD, 20));
                 celda.setPreferredSize(new Dimension(55, 55));
                 celda.setBackground(Color.WHITE);
+                int v = tableroInicial[fila][col];
+                if (v != 0) {
+                    celda.setText(String.valueOf(v));
+                    celda.setEditable(false);
+                    celda.setForeground(new Color(30, 30, 30));
+                }
                 celdas[fila][col] = celda;
-
                 celda.addFocusListener(new java.awt.event.FocusAdapter() {
                     @Override
                     public void focusGained(java.awt.event.FocusEvent e) {
@@ -45,7 +53,6 @@ public class PantallaSudoku extends BaseGUI {
                         resaltar.colorearPor(celda);
                     }
                 });
-
                 int[] b = bordePara(fila, col);
                 celda.setBorder(BorderFactory.createMatteBorder(b[0], b[1], b[2], b[3], new Color(100, 100, 100)));
                 tableroPanel.add(celda);
