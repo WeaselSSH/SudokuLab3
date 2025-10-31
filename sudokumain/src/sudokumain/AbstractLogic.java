@@ -1,13 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package sudokumain;
 
-/**
- *
- * @author DELL
- */
-public class AbstractLogic {
-    
+public abstract class AbstractLogic {
+
+    protected int[][] tablero;
+    protected boolean filasOK;
+    protected boolean columnasOK;
+    protected boolean cajasOK;
+    protected boolean ganado;
+
+    public abstract void juegoGanado();
+
+    public abstract void columnaValida();
+
+    public abstract void cajaValida();
+
+    public abstract void filaValida();
 }
