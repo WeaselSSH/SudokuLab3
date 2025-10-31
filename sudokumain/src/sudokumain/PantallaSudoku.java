@@ -22,11 +22,11 @@ public class PantallaSudoku extends BaseGUI {
         panel.setLayout(new BorderLayout(10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
-        JLabel titulo = createLabel("Sudoku 9×9", 26, Font.BOLD, new Color(33, 33, 33));
+        JLabel titulo = createLabel("Sudoku", 26, Font.BOLD, new Color(33, 33, 33));
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(titulo, BorderLayout.NORTH);
 
-        JPanel tableroPanel = new JPanel(new GridLayout(9, 9, 1, 1)); // separación leve
+        JPanel tableroPanel = new JPanel(new GridLayout(9, 9, 1, 1)); 
         tableroPanel.setOpaque(false);
         tableroPanel.setBorder(BorderFactory.createLineBorder(new Color(80, 80, 80), 2));
 
@@ -52,7 +52,18 @@ public class PantallaSudoku extends BaseGUI {
                 if (col == 8) {
                     right = 2;
                 }
+                JPanel botonesPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+                botonesPanel.setOpaque(false);
 
+                JButton btnSalir = createBtn("Salir");
+                JButton btnVerificar = createBtn("Verificar");
+                JButton btnReiniciar = createBtn("Reiniciar");
+
+                botonesPanel.add(btnSalir);
+                botonesPanel.add(btnVerificar);
+                botonesPanel.add(btnReiniciar);
+
+                panel.add(botonesPanel, BorderLayout.SOUTH);
                 celda.setBorder(BorderFactory.createMatteBorder(top, left, bottom, right, new Color(100, 100, 100)));
 
                 tableroPanel.add(celda);

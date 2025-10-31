@@ -39,8 +39,8 @@ public class BaseGUI extends JFrame {
         JButton b = new JButton(text);
 
         b.setFont(baseFont.deriveFont(Font.BOLD, 14F));
-        b.setBackground(new Color(33, 150, 243));
-        b.setForeground(Color.WHITE);
+        b.setBackground(new Color(255, 237, 171));
+        b.setForeground(Color.BLACK);
         b.setFocusPainted(false);
         b.setBorder(new EmptyBorder(10, 16, 10, 16));
         b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -73,8 +73,8 @@ public class BaseGUI extends JFrame {
                 super.paintComponent(g);
                 Graphics2D g2 = (Graphics2D) g.create();
 
-                GradientPaint gp = new GradientPaint(0, 0, new Color(245, 248, 255), getWidth(), getHeight(),
-                        new Color(225, 235, 250)
+                GradientPaint gp = new GradientPaint(0, 0, new Color(255, 244, 204), getWidth(), getHeight(),
+                        new Color(245, 248, 255)
                 );
 
                 g2.setPaint(gp);
