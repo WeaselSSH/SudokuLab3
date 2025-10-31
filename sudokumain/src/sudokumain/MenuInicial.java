@@ -11,15 +11,16 @@ import javax.swing.SwingUtilities;
  *
  * @author gaat1
  */
-public class MenuInicial{
+public class MenuInicial extends BaseGUI{
+    
     public MenuInicial(){
-        BaseGUI frame = new BaseGUI("Menu inicial", 300,300);
-        JPanel panel = frame.createPanelPrincipal();
-        JButton Facil = frame.createBtn("Facil");
-        JButton Medio = frame.createBtn("Medio");
-        JButton Dificil = frame.createBtn("Dificil");
-        JButton Salir = frame.createBtn("Salir");
-        frame.add(panel);
+        super("Menu de Inicio", 400, 600);
+        JPanel panel = createPanelPrincipal();
+        JButton Facil = createBtn("Facil");
+        JButton Medio = createBtn("Medio");
+        JButton Dificil = createBtn("Dificil");
+        JButton Salir = createBtn("Salir");
+        add(panel);
         panel.add(Facil);
         panel.add(Medio);
         panel.add(Dificil);
