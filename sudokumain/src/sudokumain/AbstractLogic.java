@@ -17,22 +17,13 @@ public abstract class AbstractLogic {
         boolean okFilas = validarFilas();
         boolean okColumnas = validarColumnas();
         boolean okCajas = validarCajas();
-        boolean sinCeros = sinCeros();
-        return okFilas && okColumnas && okCajas && sinCeros;
-    }
-
-    protected boolean sinCeros() {
-        for (int fila = 0; fila < TAM; fila++) {
-            for (int col = 0; col < TAM; col++) {
-                if (tablero[fila][col] == 0) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        boolean tableroCompleto = sinCeros();
+        return okFilas && okColumnas && okCajas && tableroCompleto;
     }
 
     //estas funciones se heredaran en logicasudoku
+    protected abstract boolean sinCeros();
+
     protected abstract boolean validarFilas();
 
     protected abstract boolean validarColumnas();
