@@ -6,10 +6,9 @@ package sudokumain;
 
 /**
  *
- * @author andre
+ * @author DELL
  */
-public class SudokuMain {
-
+public class Sudokumain {
     public static void main(String[] args) {
         new PantallaSudoku().setVisible(true);
     }
