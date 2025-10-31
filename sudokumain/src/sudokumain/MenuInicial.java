@@ -2,69 +2,53 @@ package sudokumain;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.SwingUtilities;
 
-/**
- *
- * @author gaat1
- */
 public class MenuInicial extends BaseGUI {
 
     public MenuInicial() {
-
         super("Menu de Inicio", 700, 600);
 
         JPanel panel = createPanelPrincipal();
-        panel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
-        JLabel titulo = createLabel("MENU INICIAL", 32, Font.BOLD, new Color(33, 33, 33));
+        JLabel titulo = createLabel("MENU INICIAL", 26, Font.BOLD, new Color(33, 33, 33));
         titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JButton btnFacil = createBtn("Facil");
+        JButton btnMedio = createBtn("Medio");
+        JButton btnDificil = createBtn("Dificil");
+        JButton btnSalir = createBtn("Salir");
+        for (JButton b : new JButton[]{btnFacil, btnMedio, btnDificil, btnSalir}) {
+            b.setAlignmentX(Component.CENTER_ALIGNMENT);
+        }
+
         panel.add(titulo);
-        panel.add(Box.createVerticalStrut(50));
-
-        JButton Facil = createBtn("Facil");
-        JButton Medio = createBtn("Medio");
-        JButton Dificil = createBtn("Dificil");
-        JButton Salir = createBtn("Salir");
-
-        panel.add(Facil);
-        panel.add(Box.createVerticalStrut(20));
-        panel.add(Medio);
-        panel.add(Box.createVerticalStrut(20));
-        panel.add(Dificil);
-        panel.add(Box.createVerticalStrut(20));
-        panel.add(Salir);
+        panel.add(Box.createVerticalGlue());
+        panel.add(btnFacil);
+        panel.add(Box.createVerticalStrut(12));
+        panel.add(btnMedio);
+        panel.add(Box.createVerticalStrut(12));
+        panel.add(btnDificil);
+        panel.add(Box.createVerticalStrut(12));
+        panel.add(btnSalir);
         panel.add(Box.createVerticalGlue());
 
+        btnFacil.addActionListener(e -> {
+            new PantallaSudoku('F');
+            dispose();
+        });
+        btnMedio.addActionListener(e -> {
+            new PantallaSudoku('M');
+            dispose();
+        });
+        btnDificil.addActionListener(e -> {
+            new PantallaSudoku('D');
+            dispose();
+        });
+        btnSalir.addActionListener(e -> dispose());
+
         add(panel);
-
-     
-
-        
-        
-        Facil.addActionListener(e -> {
-            int[][] t = Tableros.randomFacil();
-            new PantallaSudoku(t);
-            dispose();
-        });
-        
-        Medio.addActionListener(e -> {
-            int[][] t = Tableros.randomMedio();
-            new PantallaSudoku(t);
-            dispose();
-        });
-        
-        Dificil.addActionListener(e -> {
-            int[][] t = Tableros.randomDificil();
-            new PantallaSudoku(t);
-            dispose();
-        });
-        
-        Salir.addActionListener(e -> {
-            SwingUtilities.invokeLater(() -> {
-                System.exit(0);
-            });
-        });
+        setVisible(true);
     }
 }
