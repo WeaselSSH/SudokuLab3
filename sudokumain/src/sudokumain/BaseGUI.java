@@ -22,7 +22,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 
-public class BaseGUI extends JFrame {
+public abstract class BaseGUI extends JFrame {
 
     //font default
     private final Font baseFont = new Font("SansSerif", Font.PLAIN, 14);
