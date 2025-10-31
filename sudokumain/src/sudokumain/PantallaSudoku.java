@@ -1,26 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package sudokumain;
 
 import java.awt.*;
 import javax.swing.*;
 
-/**
- *
- * @author andre
- */
 public class PantallaSudoku extends BaseGUI {
 
     public PantallaSudoku() {
-
         super("Sudoku", 1000, 700);
-        //ResaltarCeldas
-        JTextField[][]celdas = new JTextField[9][9];
-        Color colorCeldas = new Color(247,181,189);
-        Color colorDefault = Color.white;
-        ResaltarCeldas resaltar = new ResaltarCeldas(celdas, colorCeldas, colorDefault);
+
+        JTextField[][] celdas = new JTextField[9][9];
+        ResaltarCeldas resaltar = new ResaltarCeldas(celdas, new Color(247, 181, 189), Color.white);
 
         JPanel panel = createPanelPrincipal();
         panel.setLayout(new BorderLayout(10, 10));
@@ -30,7 +19,7 @@ public class PantallaSudoku extends BaseGUI {
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(titulo, BorderLayout.NORTH);
 
-        JPanel tableroPanel = new JPanel(new GridLayout(9, 9, 1, 1)); 
+        JPanel tableroPanel = new JPanel(new GridLayout(9, 9, 1, 1));
         tableroPanel.setOpaque(false);
         tableroPanel.setBorder(BorderFactory.createLineBorder(new Color(80, 80, 80), 2));
 
@@ -41,55 +30,46 @@ public class PantallaSudoku extends BaseGUI {
                 celda.setFont(new Font("SansSerif", Font.BOLD, 20));
                 celda.setPreferredSize(new Dimension(55, 55));
                 celda.setBackground(Color.WHITE);
-                //implementando resaltarCeldas]
-                celdas[fila][col]=celda;
-                int f = fila;
-                int c= col;
-                celda.addMouseListener(new java.awt.event.MouseAdapter(){
-                @Override
-                public void mouseClicked(java.awt.event.MouseEvent evt){
-                   resaltar.colorearCeldas(f, c);
-                }
+                celdas[fila][col] = celda;
+
+                celda.addFocusListener(new java.awt.event.FocusAdapter() {
+                    @Override
+                    public void focusGained(java.awt.event.FocusEvent e) {
+                        SwingUtilities.invokeLater(() -> resaltar.colorearPor(celda));
+                    }
                 });
-                celda.setBorder(BorderFactory.createLineBorder(new Color(150, 150, 150), 1)); // 🔹 líneas más finas
+                celda.addMouseListener(new java.awt.event.MouseAdapter() {
+                    @Override
+                    public void mousePressed(java.awt.event.MouseEvent e) {
+                        celda.requestFocusInWindow();
+                        resaltar.colorearPor(celda);
+                    }
+                });
 
-                int top = 1, left = 1, bottom = 1, right = 1;
-                if (fila % 3 == 0 && fila != 0) {
-                    top = 2;
-                }
-                if (col % 3 == 0 && col != 0) {
-                    left = 2;
-                }
-                if (fila == 8) {
-                    bottom = 2;
-                }
-                if (col == 8) {
-                    right = 2;
-                }
-                JPanel botonesPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-                botonesPanel.setOpaque(false);
-
-                JButton btnSalir = createBtn("Salir");
-                JButton btnVerificar = createBtn("Verificar");
-                JButton btnReiniciar = createBtn("Reiniciar");
-
-                botonesPanel.add(btnSalir);
-                botonesPanel.add(btnVerificar);
-                botonesPanel.add(btnReiniciar);
-
-                panel.add(botonesPanel, BorderLayout.SOUTH);
-                celda.setBorder(BorderFactory.createMatteBorder(top, left, bottom, right, new Color(100, 100, 100)));
-
+                int[] b = bordePara(fila, col);
+                celda.setBorder(BorderFactory.createMatteBorder(b[0], b[1], b[2], b[3], new Color(100, 100, 100)));
                 tableroPanel.add(celda);
-  
             }
         }
 
+        JPanel botonesPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+        botonesPanel.setOpaque(false);
+        botonesPanel.add(createBtn("Salir"));
+        botonesPanel.add(createBtn("Verificar"));
+        botonesPanel.add(createBtn("Reiniciar"));
+
         panel.add(tableroPanel, BorderLayout.CENTER);
+        panel.add(botonesPanel, BorderLayout.SOUTH);
         add(panel);
-                setVisible(true);
+        setVisible(true);
     }
-    
-    
-    
+
+    private int[] bordePara(int fila, int col) {
+        int g = 3, f = 1;
+        int top = (fila == 0) ? g : (fila % 3 == 0 ? g : f);
+        int left = (col == 0) ? g : (col % 3 == 0 ? g : f);
+        int bottom = (fila == 8) ? g : f;
+        int right = (col == 8) ? g : f;
+        return new int[]{top, left, bottom, right};
+    }
 }
