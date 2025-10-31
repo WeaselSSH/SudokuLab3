@@ -31,6 +31,11 @@ public class ResaltarCeldas {
     //metodo principal
     public void colorearCeldas(){
         limpiarCeldas();
+        for (int i=0; i<9; i++){
+            for (int j=0; j>9; j++){
+                
+            }
+        }
         
     }
 }
