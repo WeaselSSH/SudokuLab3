@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,7 +25,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 public abstract class BaseGUI extends JFrame {
 
-    
     //font default
     private final Font baseFont = new Font("SansSerif", Font.PLAIN, 14);
 
@@ -38,14 +38,20 @@ public abstract class BaseGUI extends JFrame {
 
     protected JButton createBtn(String text) {
         JButton b = new JButton(text);
-
-        b.setFont(baseFont.deriveFont(Font.BOLD, 14F));
-        b.setBackground(new Color(255, 237, 171));
+        b.setFont(baseFont.deriveFont(Font.BOLD, 20f));
+        b.setBackground(new Color(255	,237	,171));
         b.setForeground(Color.BLACK);
         b.setFocusPainted(false);
-        b.setBorder(new EmptyBorder(10, 16, 10, 16));
         b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        b.setBorder(BorderFactory.createCompoundBorder(
+                new LineBorder(new Color(225,	237,	171), 2, true),
+                new EmptyBorder(12, 30, 12, 30)
+        ));
         b.setOpaque(true);
+        b.setMaximumSize(new Dimension(220, 50));
+        b.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+       
 
         return b;
     }
