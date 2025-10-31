@@ -8,27 +8,27 @@ public class PantallaSudoku extends BaseGUI {
     private char dificultad;
     private int[][] tableroInicial;
     private JTextField[][] celdas;
-    
+
     public PantallaSudoku(char dificultad) {
         super("Sudoku", 1000, 700);
         this.dificultad = dificultad;
         this.tableroInicial = generarTablero();
-        
+
         celdas = new JTextField[9][9];
         ResaltarCeldas resaltar = new ResaltarCeldas(celdas, new Color(247, 181, 189), Color.white);
-        
+
         JPanel panel = createPanelPrincipal();
         panel.setLayout(new BorderLayout(10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
-        
+
         JLabel titulo = createLabel("Sudoku", 26, Font.BOLD, new Color(33, 33, 33));
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(titulo, BorderLayout.NORTH);
-        
+
         JPanel tableroPanel = new JPanel(new GridLayout(9, 9, 1, 1));
         tableroPanel.setOpaque(false);
         tableroPanel.setBorder(BorderFactory.createLineBorder(new Color(80, 80, 80), 2));
-        
+
         for (int fila = 0; fila < 9; fila++) {
             for (int col = 0; col < 9; col++) {
                 JTextField celda = createTextField();
@@ -55,14 +55,14 @@ public class PantallaSudoku extends BaseGUI {
                 tableroPanel.add(celda);
             }
         }
-        
+
         cargarTablero(tableroInicial);
-        
+
         JButton btnSalir = createBtn("Regresar");
         JButton btnVerificar = createBtn("Verificar");
         JButton btnReiniciar = createBtn("Reiniciar");
         JButton btnNuevo = createBtn("Nuevo Tablero");
-        
+
         btnSalir.addActionListener(e -> {
             this.dispose();
             new MenuInicial().setVisible(true);
@@ -73,20 +73,20 @@ public class PantallaSudoku extends BaseGUI {
             tableroInicial = generarTablero();
             cargarTablero(tableroInicial);
         });
-        
+
         JPanel botonesPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         botonesPanel.setOpaque(false);
         botonesPanel.add(btnSalir);
         botonesPanel.add(btnVerificar);
         botonesPanel.add(btnReiniciar);
         botonesPanel.add(btnNuevo);
-        
+
         panel.add(tableroPanel, BorderLayout.CENTER);
         panel.add(botonesPanel, BorderLayout.SOUTH);
         add(panel);
         setVisible(true);
     }
-    
+
     private void cargarTablero(int[][] t) {
         for (int f = 0; f < 9; f++) {
             for (int c = 0; c < 9; c++) {
@@ -105,7 +105,7 @@ public class PantallaSudoku extends BaseGUI {
             }
         }
     }
-    
+
     private int[][] leerTableroActual() {
         int[][] t = new int[9][9];
         for (int f = 0; f < 9; f++) {
@@ -124,14 +124,24 @@ public class PantallaSudoku extends BaseGUI {
         }
         return t;
     }
-    
+
     private void verificar() {
         int[][] t = leerTableroActual();
         LogicaSudoku logica = new LogicaSudoku(t);
         boolean ok = logica.validar();
-        JOptionPane.showMessageDialog(this, ok ? "Tablero correcto" : "Tablero inválido");
+
+        if (ok) {
+            JOptionPane.showMessageDialog(this, "¡Lo lograste! Has ganado el juego.");
+             this.dispose();
+            new MenuInicial().setVisible(true);
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Tablero inválido, intentalo de nuevo");
+
+        }
+//        JOptionPane.showMessageDialog(this, ok ? "¡Felicidades! Ya ganaste. adios" : "Tablero inválido");
     }
-    
+
     private int[][] generarTablero() {
         switch (Character.toUpperCase(dificultad)) {
             case 'F':
@@ -144,7 +154,7 @@ public class PantallaSudoku extends BaseGUI {
                 return Tableros.randomFacil();
         }
     }
-    
+
     private int[] bordePara(int fila, int col) {
         int g = 3, f = 1;
         int top = (fila == 0) ? g : (fila % 3 == 0 ? g : f);
