@@ -4,12 +4,17 @@
  */
 package sudokumain;
 
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author DELL
  */
 public class Sudokumain{
     public static void main(String[] args) {
-        new PantallaSudoku().setVisible(true);
+        SwingUtilities.invokeLater(()->{
+              MenuInicial ventana = new MenuInicial();
+               ventana.setVisible(true);
+            }); 
     }
 }
