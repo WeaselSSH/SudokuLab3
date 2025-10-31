@@ -1,8 +1,6 @@
-
 package sudokumain;
 
-
-
+import java.util.Random;
 
 public class Tableros {
 
@@ -96,7 +94,6 @@ public class Tableros {
         {0, 0, 5, 0, 0, 0, 0, 8, 7}};
 
     private static final int[][] TD3 = new int[][]{
-
         {0, 2, 0, 6, 0, 5, 9, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 1},
         {6, 0, 7, 0, 1, 0, 8, 0, 5},
@@ -106,5 +103,32 @@ public class Tableros {
         {0, 0, 0, 5, 6, 0, 0, 1, 0},
         {1, 0, 9, 0, 4, 0, 0, 8, 0},
         {8, 0, 0, 0, 0, 0, 0, 5, 0}};
+
+    private static final int[][][] F = {TF1, TF2, TF3};
+    private static final int[][][] M = {TM1, TM2, TM3};
+    private static final int[][][] D = {TD1, TD2, TD3};
+    private static final Random random = new Random();
+
+    public static int[][] randomFacil() {
+        return copia(F[random.nextInt(F.length)]);
+    }
+
+    public static int[][] randomMedio() {
+        return copia(M[random.nextInt(M.length)]);
+    }
+
+    public static int[][] randomDificil() {
+        return copia(D[random.nextInt(D.length)]);
+    }
+
+    private static int[][] copia(int[][] src) {
+        int[][] resultado = new int[9][9];
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                resultado[i][j] = src[i][j];
+            }
+        }
+        return resultado;
+    }
 
 }

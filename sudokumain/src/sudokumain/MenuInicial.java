@@ -23,18 +23,15 @@ public class MenuInicial extends BaseGUI {
     public MenuInicial() {
 
         super("Menu de Inicio", 700, 600);
-      
- JPanel panel = createPanelPrincipal();
+
+        JPanel panel = createPanelPrincipal();
         panel.setLayout(new BorderLayout(10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
         JLabel titulo = createLabel("MENU INICIAL", 26, Font.BOLD, new Color(33, 33, 33));
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(titulo, BorderLayout.NORTH);
-        
-       
-        
-        
+
         JButton Facil = createBtn("Facil");
 
         JButton Medio = createBtn("Medio");
@@ -59,23 +56,26 @@ public class MenuInicial extends BaseGUI {
         panel.add(Box.createVerticalGlue());
 
         Facil.addActionListener(e -> {
-            SwingUtilities.invokeLater(() -> {
-
-            });
+            int[][] t = Tableros.randomFacil();
+            new PantallaSudoku(t);
+            dispose();
         });
+        
         Medio.addActionListener(e -> {
-            SwingUtilities.invokeLater(() -> {
-
-            });
+            int[][] t = Tableros.randomMedio();
+            new PantallaSudoku(t);
+            dispose();
         });
+        
         Dificil.addActionListener(e -> {
-            SwingUtilities.invokeLater(() -> {
-
-            });
+            int[][] t = Tableros.randomDificil();
+            new PantallaSudoku(t);
+            dispose();
         });
+        
         Salir.addActionListener(e -> {
             SwingUtilities.invokeLater(() -> {
-
+                System.exit(0);
             });
         });
     }
